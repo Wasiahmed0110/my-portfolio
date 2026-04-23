@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { Github, Linkedin, Mail, Code2, Cpu, Rocket, Menu, X, Terminal, Briefcase, GraduationCap } from 'lucide-react';
+import Image from 'next/image';
+import { Github, Linkedin, Mail, Code2, Cpu, Rocket, Menu, X, Terminal, Briefcase, GraduationCap, Download } from 'lucide-react';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -98,19 +99,41 @@ export default function Portfolio() {
       <main>
         {/* ── HERO ─────────────────────────────────────── */}
         <section id="home" className="hero">
-          <p className="hero-eyebrow">// Hello, world! I am Wasi Ahmed</p>
-          <h1 className="headline">
-            Bridging Bare-Metal<br />
-            Hardware to{' '}
-            <span className="highlight">Scalable Cloud<br />Deployments.</span>
-          </h1>
-          <p className="sub-headline">
-            Electrical Engineering Undergrad @ FAST-NUCES |{' '}<br/>
-            Specializing in Embedded C++, DSA, and DevOps.
-          </p>
-          <div className="cta-buttons">
-            <a href="#projects" className="btn btn-primary">View Projects</a>
-            <a href="#contact" className="btn btn-secondary">Download Resume</a>
+          <div className="hero-content">
+            <div className="hero-text">
+              <p className="hero-eyebrow">// Hello, world! I am Wasi Ahmed</p>
+              <h1 className="headline">
+                Bridging Bare-Metal<br />
+                Hardware to{' '}
+                <span className="highlight">Scalable Cloud<br />Deployments.</span>
+              </h1>
+              <p className="sub-headline">
+                Electrical Engineering Undergrad @ FAST-NUCES |{' '}<br/>
+                Specializing in Embedded C++, DSA, and DevOps.
+              </p>
+              <div className="cta-buttons">
+                <a href="#projects" className="btn btn-primary">View Projects</a>
+                <a
+                  href="/resume.pdf"
+                  download="Wasi_Ahmed_Resume.pdf"
+                  className="btn btn-secondary"
+                >
+                  <Download size={16} /> Download Resume
+                </a>
+              </div>
+            </div>
+            <div className="hero-image-wrap">
+              <div className="hero-image-ring">
+                <Image
+                  src="/profile.jpg"
+                  alt="Wasi Ahmed"
+                  width={380}
+                  height={460}
+                  className="hero-profile-img"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -296,10 +319,10 @@ export default function Portfolio() {
                 24 hours.
               </p>
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" className="social-icon" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/wasi-ahmed-39ab522b7/" target="_blank" rel="noreferrer" className="social-icon" aria-label="LinkedIn">
                   <Linkedin size={22} />
                 </a>
-                <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" className="social-icon" aria-label="GitHub">
+                <a href="https://github.com/Wasiahmed0110" target="_blank" rel="noreferrer" className="social-icon" aria-label="GitHub">
                   <Github size={22} />
                 </a>
                 <a href="mailto:wasiahmed0110@gmail.com" className="social-icon" aria-label="Email">
