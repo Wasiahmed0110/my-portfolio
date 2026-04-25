@@ -31,17 +31,14 @@ export default function Portfolio() {
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
-
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.set('_time_gmt5', getGMT5Time());
-
     try {
       const response = await fetch('https://formsubmit.co/ajax/wasiahmed0110@gmail.com', {
         method: 'POST',
         body: formData,
       });
-
       const data = await response.json();
 
       if (data.success === 'true' || data.success === true) {
@@ -65,14 +62,13 @@ export default function Portfolio() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.set('_time_gmt5', getGMT5Time());
-    formData.set('Given_Stars', `${reviewRating} out of 5`); // Send the selected stars
+    formData.set('Given_Stars', `${reviewRating} out of 5`);
 
     try {
       const response = await fetch('https://formsubmit.co/ajax/wasiahmed0110@gmail.com', {
         method: 'POST',
         body: formData,
       });
-
       const data = await response.json();
 
       if (data.success === 'true' || data.success === true) {
@@ -91,7 +87,7 @@ export default function Portfolio() {
 
   return (
     <>
-      {/* ── NAVBAR ─────────────────────────────────────── */}
+      {/* Navbar Section */}
       <nav className="navbar">
         <div className="logo">&lt;DevOps /&gt;</div>
 
@@ -134,11 +130,11 @@ export default function Portfolio() {
       )}
 
       <main>
-        {/* ── HERO ─────────────────────────────────────── */}
+        {/* Hero Section */}
         <section id="home" className="hero">
           <div className="hero-content">
             <div className="hero-text">
-              <p className="hero-eyebrow">// Hello, world! I am Wasi Ahmed</p>
+              <p className="hero-eyebrow">{"// Hello, world!"} I am Wasi Ahmed</p>
               <h1 className="headline">
                 Bridging Bare-Metal<br />
                 Hardware to{' '}
@@ -174,20 +170,22 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ── ABOUT ────────────────────────────────────── */}
+        {/* About Section */}
         <section id="about">
           <p className="section-label">01. About</p>
           <h2 className="section-title">Who I Am</h2>
           <div className="about-card">
             <p>
               My journey into technology began with wiring up circuits and programming microcontrollers like the{' '}
-              <strong>ESP32 & RaspberryPi</strong>. As I delved deeper into building real-world hardware applications, I discovered a
+              <strong>ESP32 &amp; RaspberryPi</strong>.
+              As I delved deeper into building real-world hardware applications, I discovered a
               profound passion for logical problem-solving and software architecture, leading me to master{' '}
               <strong>Data Structures and Algorithms (DSA)</strong>.
             </p>
             <p>
               Today, I bridge the gap between low-level hardware and high-level software by designing and deploying
-              robust, automated systems. Through <strong>DevOps practices and CI/CD pipelines</strong>, I ensure that
+              robust, automated systems.
+              Through <strong>DevOps practices and CI/CD pipelines</strong>, I ensure that
               scalable applications run smoothly and reliably in the cloud.
             </p>
             <div className="highlight-box">
@@ -201,7 +199,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ── SKILLS ───────────────────────────────────── */}
+        {/* Skills Section */}
         <section id="skills">
           <p className="section-label">02. Skills</p>
           <h2 className="section-title">Technical Arsenal</h2>
@@ -210,7 +208,8 @@ export default function Portfolio() {
               <Code2 size={36} style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }} />
               <h3>Software Engineering</h3>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
-                Proficient in C++, Python, and JavaScript. Strong grasp of Data Structures, Algorithms, and
+                Proficient in C++, Python, and JavaScript.
+                Strong grasp of Data Structures, Algorithms, and
                 Object-Oriented Design patterns.
               </p>
             </div>
@@ -226,24 +225,23 @@ export default function Portfolio() {
               <Cpu size={36} style={{ color: '#10b981', marginBottom: '1rem' }} />
               <h3>Embedded Systems</h3>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
-                Programming RaspberryPi & ESP32, IoT architecture, Real-Time Operating Systems (RTOS), and hardware-software
+                Programming RaspberryPi &amp; ESP32, IoT architecture, Real-Time Operating Systems (RTOS), and hardware-software
                 integration.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── PROJECTS ─────────────────────────────────── */}
+        {/* Projects Section */}
         <section id="projects">
           <p className="section-label">03. Projects</p>
           <h2 className="section-title">Featured Projects</h2>
           <div className="grid">
-            {/* Project 1 */}
             <div className="project-card">
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.8rem' }}>DevOps-Based Smart Carpool</h3>
               <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.8, flexGrow: 1 }}>
-                Developed a university carpool management system focused on solving unverified booking issues. Handled
-                full automation and CI/CD pipelines for optimal system reliability.
+                Developed a university carpool management system focused on solving unverified booking issues.
+                Handled full automation and CI/CD pipelines for optimal system reliability.
               </p>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
                 <span className="tag">DevOps</span>
@@ -252,7 +250,7 @@ export default function Portfolio() {
                 <span className="tag">GitHub Actions</span>
               </div>
               <div style={{ display: 'flex', gap: '1.2rem' }}>
-                <a href="https://github.com/yourusername/carpool-system" target="_blank" rel="noreferrer"
+                <a href="https://github.com/Wasiahmed0110" target="_blank" rel="noreferrer"
                   style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
                   onMouseOver={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
                   onMouseOut={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
@@ -261,7 +259,6 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Project 2 */}
             <div className="project-card">
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.8rem' }}>Real-Time Smart Energy Monitor</h3>
               <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.8, flexGrow: 1 }}>
@@ -275,7 +272,7 @@ export default function Portfolio() {
                 <span className="tag">Blynk</span>
               </div>
               <div style={{ display: 'flex', gap: '1.2rem' }}>
-                <a href="https://github.com/yourusername/energy-monitor" target="_blank" rel="noreferrer"
+                <a href="https://github.com/Wasiahmed0110" target="_blank" rel="noreferrer"
                   style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
                   onMouseOver={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
                   onMouseOut={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
@@ -286,18 +283,17 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ── EXPERIENCE ───────────────────────────────── */}
+        {/* Experience Section */}
         <section id="experience">
           <p className="section-label">04. Experience</p>
           <h2 className="section-title">Work &amp; Education</h2>
           <div className="timeline">
-
             <div className="timeline-item">
               <div className="timeline-dot" />
               <div className="timeline-content">
                 <h3 className="timeline-title">STEM Instructor</h3>
                 <p className="timeline-org"><Briefcase size={13} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />Freelance / Private Tutoring</p>
-                <span className="timeline-date">2022 — Present</span>
+                <span className="timeline-date">2022 &mdash; Present</span>
                 <p>
                   Simplified complex Physics, Mathematics, and Computer Science concepts for high school students.
                   Fostered an environment of curiosity and logical problem-solving, emphasizing strong communication and
@@ -310,11 +306,11 @@ export default function Portfolio() {
               <div className="timeline-dot" />
               <div className="timeline-content">
                 <h3 className="timeline-title">DevOps Engineer (Academic Project Lead)</h3>
-                <p className="timeline-org"><Briefcase size={13} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />FAST-NUCES — Software Engineering Dept.</p>
-                <span className="timeline-date">Jan 2024 — May 2024</span>
+                <p className="timeline-org"><Briefcase size={13} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />FAST-NUCES &mdash; Software Engineering Dept.</p>
+                <span className="timeline-date">Jan 2024 &mdash; May 2024</span>
                 <p>
-                  Led the DevOps track for a university-level carpool management system. Set up Docker-based
-                  containerization, GitHub Actions CI/CD pipelines, and automated deployment workflows for seamless
+                  Led the DevOps track for a university-level carpool management system.
+                  Set up Docker-based containerization, GitHub Actions CI/CD pipelines, and automated deployment workflows for seamless
                   integration and delivery across team members.
                 </p>
               </div>
@@ -328,26 +324,22 @@ export default function Portfolio() {
                   <GraduationCap size={13} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
                   FAST-NUCES, Islamabad
                 </p>
-                <span className="timeline-date">2022 — 2026 (Expected)</span>
+                <span className="timeline-date">2022 &mdash; 2026 (Expected)</span>
                 <p>
-                  Specializing in Embedded Systems and Software Engineering. Coursework includes Data Structures &amp;
-                  Algorithms, Digital Logic Design, Microprocessor Systems, Operating Systems, and Software Project
-                  Management.
+                  Specializing in Embedded Systems and Software Engineering.
+                  Coursework includes Data Structures &amp; Algorithms, Digital Logic Design, Microprocessor Systems, Operating Systems, and Software Project Management.
                 </p>
               </div>
             </div>
-
           </div>
         </section>
 
-        {/* ── REVIEWS & RATINGS (NEW SECTION) ──────────── */}
+        {/* Testimonials Section */}
         <section id="reviews">
           <p className="section-label">05. Testimonials</p>
           <h2 className="section-title">Ratings &amp; Reviews</h2>
 
-          {/* Play Store Style Rating Summary */}
           <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', background: 'var(--glass-bg)', padding: '2rem', borderRadius: '10px', border: '1px solid var(--glass-border)', marginBottom: '2rem' }}>
-            {/* Left: Big Number */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <h1 style={{ fontSize: '4.5rem', fontWeight: 800, margin: 0, color: 'var(--text-main)', lineHeight: 1 }}>4.3</h1>
               <div style={{ display: 'flex', color: 'var(--accent-primary)', gap: '0.2rem', marginTop: '0.5rem' }}>
@@ -360,7 +352,6 @@ export default function Portfolio() {
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>14 reviews</p>
             </div>
 
-            {/* Right: Progress Bars */}
             <div style={{ flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {[
                 { star: 5, width: '70%' },
@@ -379,7 +370,6 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* Dummy Review Card */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
             <div className="card" style={{ padding: '1.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'flex-start' }}>
@@ -397,12 +387,11 @@ export default function Portfolio() {
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Oct 12, 2023</span>
               </div>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                "Wasi is an exceptional developer! His strong grasp of CI/CD pipelines and hardware-software integration helped us automate our deployments perfectly. Highly recommended for any tech team!"
+                &quot;Wasi is an exceptional developer! His strong grasp of CI/CD pipelines and hardware-software integration helped us automate our deployments perfectly. Highly recommended for any tech team!&quot;
               </p>
             </div>
           </div>
 
-          {/* Submit a Review Form */}
           <div className="contact-container" style={{ gridTemplateColumns: '1fr', maxWidth: '600px', margin: '0 auto' }}>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)', textAlign: 'center' }}>
               Leave a Review
@@ -423,7 +412,6 @@ export default function Portfolio() {
                 </div>
               )}
 
-              {/* Star Selector */}
               <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
@@ -459,12 +447,11 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ── CONTACT ──────────────────────────────────── */}
+        {/* Contact Section */}
         <section id="contact">
           <p className="section-label">06. Contact</p>
           <h2 className="section-title">Let&apos;s Connect</h2>
           <div className="contact-container">
-            {/* Left info */}
             <div>
               <h3 style={{ fontSize: '1.6rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--accent-primary)' }}>
                 Build scalable solutions together.
@@ -496,7 +483,6 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Right form */}
             <form className="contact-form" onSubmit={handleContactSubmit}>
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
@@ -540,7 +526,7 @@ export default function Portfolio() {
       </main>
 
       <footer>
-        <p>Designed &amp; Built by <span style={{ color: 'var(--accent-primary)' }}>Wasi Ahmed</span> · GMT+5</p>
+        <p>Designed &amp; Built by <span style={{ color: 'var(--accent-primary)' }}>Wasi Ahmed</span> &middot; GMT+5</p>
       </footer>
     </>
   );
