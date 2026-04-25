@@ -2,11 +2,15 @@
 
 import { useState, FormEvent } from 'react';
 import Image from 'next/image';
-import { Github, Linkedin, Mail, Code2, Cpu, Rocket, Menu, X, Terminal, Briefcase, GraduationCap, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, Code2, Cpu, Rocket, Menu, X, Terminal, Briefcase, GraduationCap, Download, Star } from 'lucide-react';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  // New States for Review Form
+  const [reviewFormStatus, setReviewFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [reviewRating, setReviewRating] = useState<number>(5);
 
   const handleNavClick = () => setIsMenuOpen(false);
 
@@ -23,13 +27,13 @@ export default function Portfolio() {
     }) + ' (GMT+5)';
   };
 
+  // Contact Form Handler
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    // Inject GMT+5 timestamp
     formData.set('_time_gmt5', getGMT5Time());
 
     try {
@@ -53,6 +57,38 @@ export default function Portfolio() {
     setTimeout(() => setFormStatus('idle'), 5000);
   };
 
+  // Review Form Handler
+  const handleReviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setReviewFormStatus('submitting');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.set('_time_gmt5', getGMT5Time());
+    formData.set('Given_Stars', `${reviewRating} out of 5`); // Send the selected stars
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/wasiahmed0110@gmail.com', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success === 'true' || data.success === true) {
+        setReviewFormStatus('success');
+        form.reset();
+        setReviewRating(5); // Reset stars back to 5
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch {
+      setReviewFormStatus('error');
+    }
+
+    setTimeout(() => setReviewFormStatus('idle'), 5000);
+  };
+
   return (
     <>
       {/* ── NAVBAR ─────────────────────────────────────── */}
@@ -64,6 +100,7 @@ export default function Portfolio() {
           <li><a href="#skills" onClick={handleNavClick}>Skills</a></li>
           <li><a href="#projects" onClick={handleNavClick}>Projects</a></li>
           <li><a href="#experience" onClick={handleNavClick}>Experience</a></li>
+          <li><a href="#reviews" onClick={handleNavClick}>Reviews</a></li>
           <li><a href="#contact" onClick={handleNavClick}>Contact</a></li>
         </ul>
 
@@ -84,7 +121,7 @@ export default function Portfolio() {
           zIndex: 999, borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {['about', 'skills', 'projects', 'experience', 'contact'].map((s) => (
+            {['about', 'skills', 'projects', 'experience', 'reviews', 'contact'].map((s) => (
               <li key={s}>
                 <a href={`#${s}`} onClick={handleNavClick}
                   style={{ color: 'var(--text-main)', textDecoration: 'none', fontSize: '1.1rem', fontWeight: 600, textTransform: 'capitalize' }}>
@@ -303,9 +340,128 @@ export default function Portfolio() {
           </div>
         </section>
 
+        {/* ── REVIEWS & RATINGS (NEW SECTION) ──────────── */}
+        <section id="reviews">
+          <p className="section-label">05. Testimonials</p>
+          <h2 className="section-title">Ratings &amp; Reviews</h2>
+
+          {/* Play Store Style Rating Summary */}
+          <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap', alignItems: 'center', background: 'var(--glass-bg)', padding: '2rem', borderRadius: '10px', border: '1px solid var(--glass-border)', marginBottom: '2rem' }}>
+            {/* Left: Big Number */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <h1 style={{ fontSize: '4.5rem', fontWeight: 800, margin: 0, color: 'var(--text-main)', lineHeight: 1 }}>4.3</h1>
+              <div style={{ display: 'flex', color: 'var(--accent-primary)', gap: '0.2rem', marginTop: '0.5rem' }}>
+                <Star size={20} fill="currentColor" />
+                <Star size={20} fill="currentColor" />
+                <Star size={20} fill="currentColor" />
+                <Star size={20} fill="currentColor" />
+                <Star size={20} />
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>14 reviews</p>
+            </div>
+
+            {/* Right: Progress Bars */}
+            <div style={{ flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              {[
+                { star: 5, width: '70%' },
+                { star: 4, width: '20%' },
+                { star: 3, width: '5%' },
+                { star: 2, width: '2%' },
+                { star: 1, width: '3%' }
+              ].map((item) => (
+                <div key={item.star} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                  <span style={{ color: 'var(--text-main)', fontSize: '0.9rem', width: '12px', fontWeight: 'bold' }}>{item.star}</span>
+                  <div style={{ flex: 1, height: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{ width: item.width, height: '100%', background: 'var(--accent-primary)', borderRadius: '4px' }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dummy Review Card */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
+            <div className="card" style={{ padding: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'flex-start' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                    MD
+                  </div>
+                  <div>
+                    <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.1rem' }}>Malik Danish</h4>
+                    <div style={{ display: 'flex', color: 'var(--accent-primary)', gap: '0.1rem', marginTop: '0.3rem' }}>
+                      <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" />
+                    </div>
+                  </div>
+                </div>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Oct 12, 2023</span>
+              </div>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
+                "Wasi is an exceptional developer! His strong grasp of CI/CD pipelines and hardware-software integration helped us automate our deployments perfectly. Highly recommended for any tech team!"
+              </p>
+            </div>
+          </div>
+
+          {/* Submit a Review Form */}
+          <div className="contact-container" style={{ gridTemplateColumns: '1fr', maxWidth: '600px', margin: '0 auto' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)', textAlign: 'center' }}>
+              Leave a Review
+            </h3>
+            <form className="contact-form" onSubmit={handleReviewSubmit}>
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_subject" value="New Portfolio Review!" />
+
+              {reviewFormStatus === 'success' && (
+                <div className="status-msg status-success">
+                  ✅ Thank you! Your review has been submitted successfully.
+                </div>
+              )}
+              {reviewFormStatus === 'error' && (
+                <div className="status-msg status-error">
+                  ❌ Failed to submit review. Please try again later.
+                </div>
+              )}
+
+              {/* Star Selector */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    size={28}
+                    fill={star <= reviewRating ? 'var(--accent-primary)' : 'transparent'}
+                    color={star <= reviewRating ? 'var(--accent-primary)' : 'var(--text-muted)'}
+                    style={{ cursor: 'pointer', transition: 'all 0.2s' }}
+                    onClick={() => setReviewRating(star)}
+                  />
+                ))}
+              </div>
+
+              <div className="input-group">
+                <input type="text" name="Name" required placeholder="Your Name" />
+              </div>
+              <div className="input-group">
+                <input type="email" name="Email" required placeholder="Your Email Address (Required)" />
+              </div>
+              <div className="input-group">
+                <textarea name="Review_Text" required rows={4} placeholder="Write your review here..." style={{ resize: 'vertical' }} />
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={reviewFormStatus === 'submitting'}
+                style={{ opacity: reviewFormStatus === 'submitting' ? 0.7 : 1, justifyContent: 'center', width: '100%' }}
+              >
+                {reviewFormStatus === 'submitting' ? 'Submitting...' : 'Submit Review'}
+              </button>
+            </form>
+          </div>
+        </section>
+
         {/* ── CONTACT ──────────────────────────────────── */}
         <section id="contact">
-          <p className="section-label">05. Contact</p>
+          <p className="section-label">06. Contact</p>
           <h2 className="section-title">Let&apos;s Connect</h2>
           <div className="contact-container">
             {/* Left info */}
@@ -342,7 +498,6 @@ export default function Portfolio() {
 
             {/* Right form */}
             <form className="contact-form" onSubmit={handleContactSubmit}>
-              {/* Hidden FormSubmit config */}
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_subject" value="New Portfolio Message" />
