@@ -84,7 +84,7 @@ export default function Portfolio() {
           zIndex: 999, borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {['about','skills','projects','experience','contact'].map((s) => (
+            {['about', 'skills', 'projects', 'experience', 'contact'].map((s) => (
               <li key={s}>
                 <a href={`#${s}`} onClick={handleNavClick}
                   style={{ color: 'var(--text-main)', textDecoration: 'none', fontSize: '1.1rem', fontWeight: 600, textTransform: 'capitalize' }}>
@@ -108,7 +108,7 @@ export default function Portfolio() {
                 <span className="highlight">Scalable Cloud<br />Deployments.</span>
               </h1>
               <p className="sub-headline">
-                Electrical Engineering Undergrad @ FAST-NUCES |{' '}<br/>
+                Electrical Engineering Undergrad @ FAST-NUCES |{' '}<br />
                 Specializing in Embedded C++, DSA, and DevOps.
               </p>
               <div className="cta-buttons">
@@ -144,7 +144,7 @@ export default function Portfolio() {
           <div className="about-card">
             <p>
               My journey into technology began with wiring up circuits and programming microcontrollers like the{' '}
-              <strong>ESP32</strong>. As I delved deeper into building real-world hardware applications, I discovered a
+              <strong>ESP32 & RaspberryPi</strong>. As I delved deeper into building real-world hardware applications, I discovered a
               profound passion for logical problem-solving and software architecture, leading me to master{' '}
               <strong>Data Structures and Algorithms (DSA)</strong>.
             </p>
@@ -189,7 +189,7 @@ export default function Portfolio() {
               <Cpu size={36} style={{ color: '#10b981', marginBottom: '1rem' }} />
               <h3>Embedded Systems</h3>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
-                Programming ESP32/Arduino, IoT architecture, Real-Time Operating Systems (RTOS), and hardware-software
+                Programming RaspberryPi & ESP32, IoT architecture, Real-Time Operating Systems (RTOS), and hardware-software
                 integration.
               </p>
             </div>
